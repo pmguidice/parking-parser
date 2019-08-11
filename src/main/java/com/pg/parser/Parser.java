@@ -83,18 +83,14 @@ public class Parser {
 
         try {
             for (Element row : rowElements) {
-                String stationName = null;
-                String lotName = null;
-                Status lotStatus = null;
-
                 Elements cells = row.getElementsByTag("td");
 
-                stationName = cells.get(0).getElementsByTag("span").first().text();
+                String stationName = cells.get(0).getElementsByTag("span").first().text().trim();
 
-                lotName = cells.get(1).getElementsByTag("span").first().text();
+                String lotName = cells.get(1).getElementsByTag("span").first().text().trim();
 
                 String imgUri = cells.get(2).getElementsByTag("img").first().baseUri();
-                lotStatus = FULL_IMG_URI.equals(imgUri) ? Status.FULL : Status.OPEN;
+                Status lotStatus = FULL_IMG_URI.equals(imgUri) ? Status.FULL : Status.OPEN;
 
                 lotStatuses.add(new LotStatus(stationName, lotName, lotStatus));
             }

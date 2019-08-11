@@ -1,5 +1,7 @@
 package com.pg.parser;
 
+import com.pg.parser.beans.LotStatus;
+import com.pg.parser.beans.StationStatus;
 import org.jsoup.nodes.Document;
 import org.testng.annotations.Test;
 
@@ -43,5 +45,33 @@ public class ParserTest {
         }
 
         assertEquals(statuses.size(), NUM_LOTS);
+    }
+
+    @Test
+    public void testSerialize() throws Exception {
+        Parser parser = new Parser();
+        Processor processor = new Processor();
+
+        List<LotStatus> statuses = parser.getLotStatuses();
+
+        for (LotStatus status : statuses) {
+            String json = processor.serialize(status);
+            System.out.println(json);
+        }
+    }
+
+    @Test
+    public void testBuildStationStatuses() throws Exception {
+        Parser parser = new Parser();
+        Processor processor = new Processor();
+
+        List<LotStatus> lotStatuses = parser.getLotStatuses();
+
+        List<StationStatus> stationStatuses = processor.buildStationStatuses(lotStatuses);
+
+        for (StationStatus status : stationStatuses) {
+            String json = processor.serialize(status);
+            System.out.println(json);
+        }
     }
 }

@@ -1,4 +1,6 @@
-package com.pg.parser;
+package com.pg.parser.beans;
+
+import com.pg.parser.Status;
 
 public class LotStatus {
     private String stationName = null;

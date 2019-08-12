@@ -90,7 +90,8 @@ public class Parser {
 
                 String lotName = cells.get(1).getElementsByTag("span").first().text().trim();
 
-                String imgUri = cells.get(2).getElementsByTag("img").first().baseUri();
+                String imgUri = cells.get(2).getElementsByTag("img").first().attr("src");
+                logger.debug("lotName {}, imgUri {}", lotName, imgUri);
                 Status lotStatus = FULL_IMG_URI.equals(imgUri) ? Status.FULL : Status.OPEN;
 
                 lotStatuses.add(new LotStatus(stationName, lotName, lotStatus));
